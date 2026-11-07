@@ -3,7 +3,7 @@ from playwright.sync_api import Page, expect
 class CommonPage:
     def __init__(self, page: Page):
         self.page = page
-        self.voltar_para_home = page.get_by_role("button", name="Voltar para a Home")
+        self.voltar_para_home = page.get_by_role("button", name="Voltar para a Home").click()
 
     def assert_text(self, text):
         self.page.get_by_text(text).wait_for()
