@@ -15,3 +15,4 @@ class LoginPage:
     def assert_login_successful(self):
         expect(self.page.get_by_role("heading", name="Bem-vindo ao SimulaBank!")).to_be_visible()
   
+  
