@@ -14,6 +14,6 @@ class PixPage:
         self.enviar_pix_button.click()
 
     def assert_pix_realizado(self):
-        expect(self.page.get_by_text("")).to_be_visible()
+        expect(self.page.get_by_text("Transação Realizada com Sucesso!")).to_be_visible()
         
     
