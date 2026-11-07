@@ -9,5 +9,9 @@ class CommonPage:
         self.page.get_by_text(text).wait_for()
         expect(self.page.get_by_text(text)).to_be_visible(timeout=10000)
 
+    # def voltar_home(self):
+    #     self.voltar_para_home.click()
+
     def voltar_home(self):
-        self.voltar_para_home.click()   
+        self.voltar_para_home.wait_for(state="visible", timeout=10000)
+        self.voltar_para_home.click()
