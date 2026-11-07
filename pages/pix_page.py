@@ -3,8 +3,8 @@ from playwright.sync_api import Page, expect
 class PixPage:
     def __init__(self, page: Page):
         self.page = page
-        self.chave_pix = page.get_by_role("textbox", name="Chave Pix")
-        self.valor_pix = page.get_by_role("textbox", name="Valor")
+        self.chave_pix = self.page.locator("input[placeholder*='Chave Pix']").first
+        self.valor_pix = self.page.locator("input[placeholder*='Valor']").first
         self.enviar_pix_button = page.get_by_role("button", name="Enviar Pix")
         
     def fazer_pix(self, chave, valor):
