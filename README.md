@@ -23,8 +23,6 @@ Arquivo	Cenário	Validações principais
 tests/test_001_login.py	Login com sucesso	Preenchimento das credenciais e exibição da mensagem de boas-vindas.
 tests/test_002_pix_realizado.py	Realização de Pix	Login, acesso à opção Fazer Pix, envio da transferência, confirmação de sucesso, retorno à Home, validação do saldo e consulta ao extrato.
 
-
-Estrutura do projeto
 Projeto-2/
 ├── .github/
 │   └── workflows/
