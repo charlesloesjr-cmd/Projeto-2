@@ -1,12 +1,26 @@
-.pytest_cache/
-.vscode/
+# Ambiente virtual
 venv/
 .venv/
-.DS_Store
-test_results/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Pytest
+.pytest_cache/
+
+# Playwright
+playwright-traces/
+test-results/
 playwright-report/
-_pycache_/
-*.pyc
-# Relatórios e resultados de testes locais
-*.html
-videos/
+
+# Arquivos temporários
+trace.zip
+playwright-traces.zip
+
+# Variáveis de ambiente e segredos
+.env
+.env.*
+
+# Configurações locais do VS Code
+.vscode/

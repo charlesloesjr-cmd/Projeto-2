@@ -6,7 +6,7 @@ from pages.login_page import LoginPage
 from pages.home_page import HomePage
 from pages.pix_page import PixPage
 
-@pytest.fixture(autouse=True)
+@pytest.fixture
 def setup_page(page: Page):
     page.set_viewport_size({"width": 1500, "height": 750})
     page.goto("https://leogcarvalho.github.io/simulabank/login.html")
@@ -22,7 +22,6 @@ def login_page(page: Page):
 @pytest.fixture
 def home_page(page: Page):
     return HomePage(page)
-
 
 @pytest.fixture
 def pix_page(page: Page):

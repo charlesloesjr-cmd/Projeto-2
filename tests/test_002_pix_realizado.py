@@ -1,4 +1,4 @@
-def test_002_pix_realizado(common_page, login_page, home_page, pix_page) -> None:
+def test_002_pix_realizado(common_page, login_page, home_page, pix_page, setup_page) -> None:
     login_page.login("user1", "pass1")
     home_page.acessar_menu("Fazer Pix")
     pix_page.fazer_pix("9I.VAG.ONP/0001-38", "10,00")
