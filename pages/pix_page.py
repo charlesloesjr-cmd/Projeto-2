@@ -66,19 +66,13 @@ class PixPage:
     def fazer_pix(self, chave, valor):
         expect(self.chave_pix).to_be_visible(timeout=15000)
 
-        self.chave_pix.fill(chave)
-        self.valor_pix.fill(valor)
+        self.chave_pix.click()
+        self.chave_pix.press_sequentially(chave, delay=100)
 
-        print("Chave Pix preenchida:", self.chave_pix.input_value())
-        print("Valor preenchido:", self.valor_pix.input_value())
+        self.valor_pix.click()
+        self.valor_pix.press_sequentially(valor, delay=100)
 
         self.enviar_pix_button.click()
-
-        self.page.wait_for_timeout(2000)
-
-        print("URL após envio:", self.page.url)
-        print("Conteúdo após envio:")
-        print(self.page.locator("body").inner_text())
 
     def assert_pix_realizado(self):
         expect(
@@ -91,4 +85,3 @@ class PixPage:
                 "Você pode voltar para a página principal e continuar suas operações."
             )
         ).to_be_visible()
-
