@@ -1,12 +1,14 @@
 # Projeto 2 — API Pix e Automação de Testes
 
-Projeto de estudos e portfólio na área de **Quality Assurance (QA)**, com desenvolvimento de uma API Pix simulada e automação de testes funcionais de interface e API utilizando Python, Playwright, FastAPI e Pytest.
+Projeto de estudos e portfólio na área de **Quality Assurance (QA)**, desenvolvido com Python, Playwright, Pytest e FastAPI.
 
-O objetivo é demonstrar conhecimentos em testes funcionais, validação de regras de negócio, testes positivos e negativos, automação e documentação de resultados.
+O projeto consiste na criação de uma API Pix simulada e na implementação de testes automatizados de interface e API, com foco na validação de regras de negócio, identificação de falhas e documentação dos resultados.
+
+O objetivo é demonstrar conhecimentos práticos em testes funcionais, testes positivos e negativos, automação, organização de cenários e integração contínua.
 
 ## Tecnologias utilizadas
 
-- **Python 3.14.7** — linguagem de programação.
+- **Python 3.14.7** — linguagem utilizada no desenvolvimento e execução local.
 - **Playwright** — automação de testes de interface.
 - **Pytest** — estrutura e execução dos testes automatizados.
 - **FastAPI** — desenvolvimento da API simulada.
@@ -14,13 +16,17 @@ O objetivo é demonstrar conhecimentos em testes funcionais, validação de regr
 - **Pydantic** — validação dos dados recebidos pela API.
 - **Uvicorn** — servidor para execução da API.
 - **Pytest-HTML** — geração de relatórios de execução.
+- **Git e GitHub** — versionamento e hospedagem do projeto.
+- **GitHub Actions** — execução automatizada dos testes em pipeline CI.
 
 ## Estrutura do projeto
 
 ```text
-Projeto 2/
+Projeto-2/
 │
 ├── .github/
+│   └── workflows/
+│       └── playwright.yml
 │
 ├── pages/
 │   ├── common_page.py
@@ -43,14 +49,14 @@ Projeto 2/
 └── README.md
 ```
 
-## Funcionalidades da API Pix
+## API Pix simulada
 
-A API foi desenvolvida com FastAPI e disponibiliza as seguintes funcionalidades:
+A API foi desenvolvida utilizando FastAPI e contempla as seguintes funcionalidades:
 
 - Recebimento de solicitações de transferência Pix.
 - Normalização da chave Pix.
 - Validação simplificada de CNPJ alfanumérico.
-- Verificação de valor positivo.
+- Verificação de valores positivos.
 - Controle de limite máximo de transferência de R$ 3.000,00.
 - Consulta de destinatário em uma base simulada.
 - Retorno de mensagens e códigos HTTP conforme o resultado da operação.
@@ -90,20 +96,22 @@ Exemplo de resposta:
 | Valor acima do limite permitido | 403 |
 | Destinatário não cadastrado | 404 |
 
-**Observação:** esta é uma API educacional e simulada. A validação do CNPJ alfanumérico utiliza uma implementação simplificada para os cenários do projeto. Não representa uma validação oficial da Receita Federal e não realiza transferências financeiras reais ou integração com instituições bancárias.
+**Observação:** a API possui finalidade exclusivamente educacional. A validação do CNPJ alfanumérico utiliza uma implementação simplificada para os cenários do projeto. Não representa uma validação oficial da Receita Federal e não realiza transferências financeiras reais nem integração com instituições bancárias.
 
 ## Cenários de testes automatizados
 
 ### Testes de interface — Playwright
 
-| ID | Cenário | Resultado |
+Os testes de interface utilizam o padrão **Page Object Model (POM)**, separando os elementos e ações das páginas da implementação dos cenários de teste.
+
+| ID | Cenário | Validação |
 |---|---|---|
-| UI-001 | Realizar login com sucesso | Aprovado |
-| UI-002 | Realizar transferência Pix e validar saldo e extrato | Aprovado |
+| UI-001 | Realizar login com sucesso | Acesso à aplicação |
+| UI-002 | Realizar transferência Pix | Confirmação da transação, saldo e extrato |
 
-Os testes de interface utilizam o padrão Page Object Model (POM), separando os elementos e ações das páginas da implementação dos cenários de teste.
+A aplicação utilizada nos testes de interface é o SimulaBank:
 
-A aplicação utilizada nos testes de interface é o SimulaBank: https://leogcarvalho.github.io/simulabank/login.html
+https://leogcarvalho.github.io/simulabank/login.html
 
 ### Testes de API — Pytest e FastAPI TestClient
 
@@ -115,23 +123,25 @@ A aplicação utilizada nos testes de interface é o SimulaBank: https://leogcar
 | API-004 | Rejeitar CNPJ inválido | HTTP 400 |
 | API-005 | Rejeitar destinatário não cadastrado | HTTP 404 |
 
+Os testes de API verificam as respostas da aplicação conforme as regras de negócio implementadas.
+
 ## Como executar o projeto
 
 ### 1. Clonar o repositório
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/charlesloesjr-cmd/Projeto-2.git
 ```
 
-Entre na pasta do projeto:
+Acessar a pasta:
 
 ```bash
-cd "Projeto 2"
+cd Projeto-2
 ```
 
 ### 2. Criar e ativar o ambiente virtual
 
-Windows PowerShell:
+No Windows PowerShell:
 
 ```powershell
 python -m venv venv
@@ -141,6 +151,7 @@ python -m venv venv
 ### 3. Instalar as dependências
 
 ```powershell
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
@@ -150,7 +161,9 @@ Instalar o navegador Chromium:
 python -m playwright install chromium
 ```
 
-### 4. Executar a API
+### 4. Executar a API simulada
+
+Para iniciar a API localmente:
 
 ```powershell
 python -m uvicorn main:app --reload
@@ -164,15 +177,17 @@ Documentação interativa Swagger:
 
 http://127.0.0.1:8000/docs
 
-### 5. Executar os testes automatizados
+**Importante:** os testes automatizados atuais utilizam o TestClient para a API, portanto não é necessário manter o servidor Uvicorn em execução para rodar a suíte de testes.
 
-Com a API não sendo necessária para os testes automatizados atuais, execute a suíte completa em outro terminal:
+### 5. Executar os testes automatizados
 
 ```powershell
 python -m pytest -v
 ```
 
 ### 6. Gerar relatório HTML
+
+Para executar os testes e gerar o relatório:
 
 ```powershell
 python -m pytest -v --html=reports/relatorio.html --self-contained-html
@@ -184,20 +199,55 @@ Para abrir o relatório no navegador:
 start .\reports\relatorio.html
 ```
 
-## Resultados da execução
+## Integração contínua — GitHub Actions
 
-**Última execução registrada: 11/11/2026**
+O projeto utiliza **GitHub Actions** para automatizar a execução dos testes.
+
+O workflow está configurado para executar automaticamente quando ocorre:
+
+- Push na branch `main`.
+- Pull Request direcionado à branch `main`.
+
+Durante a execução, o pipeline realiza as seguintes etapas:
+
+1. Obtém o código do repositório.
+2. Configura o ambiente Python.
+3. Instala as dependências.
+4. Instala os navegadores necessários para o Playwright.
+5. Executa os testes automatizados.
+6. Gera o relatório HTML.
+7. Disponibiliza o relatório como artefato para download.
+
+O ambiente de CI utiliza Python 3.13, enquanto o desenvolvimento local foi realizado com Python 3.14.7.
+
+As execuções podem ser acompanhadas pela aba **Actions** do GitHub:
+
+https://github.com/charlesloesjr-cmd/Projeto-2/actions
+
+O relatório HTML pode ser baixado na seção **Artifacts** de cada execução do pipeline.
+
+## Resultados dos testes
+
+### Execução local
+
+**Última execução local registrada: 11/11/2026**
 
 | Indicador | Resultado |
 |---|---:|
 | Total de testes | 7 |
 | Aprovados | 7 |
 | Reprovados | 0 |
-| Ignorados | 0 |
+| Taxa de aprovação | 100% |
 
-**Taxa de aprovação: 100%.**
+### GitHub Actions
 
-Relatório HTML disponível na pasta `reports/relatorio.html`.
+**Execução registrada: 16/11/2026**
+
+- Pipeline finalizado com sucesso.
+- Job `test` aprovado.
+- Relatório HTML gerado e disponibilizado como artefato.
+
+Os resultados acima correspondem às execuções registradas nas respectivas datas e não representam uma garantia de aprovação em execuções futuras.
 
 ## Conhecimentos demonstrados
 
@@ -209,8 +259,10 @@ Relatório HTML disponível na pasta `reports/relatorio.html`.
 - Verificação de códigos e respostas HTTP.
 - Organização de testes com Pytest.
 - Aplicação do padrão Page Object Model.
-- Geração e documentação de relatórios de testes.
 - Utilização de Python e ferramentas do ecossistema de QA.
+- Versionamento de código com Git e GitHub.
+- Integração contínua com GitHub Actions.
+- Geração e documentação de relatórios de testes.
 
 ## Autor
 
