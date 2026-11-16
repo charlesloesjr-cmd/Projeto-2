@@ -278,7 +278,6 @@ As evidências demonstram a execução dos testes funcionais de interface e as v
 ### Testes de API — Swagger
 
 - [Evidências da API em PDF](evidencias/api/Swagger.pdf)
-- [Evidências da API em Word](evidencias/api/Swagger.docx)
 
 
 ## Autor
