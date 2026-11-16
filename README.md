@@ -264,6 +264,23 @@ Os resultados acima correspondem às execuções registradas nas respectivas dat
 - Integração contínua com GitHub Actions.
 - Geração e documentação de relatórios de testes.
 
+
+## Evidências dos testes
+
+As evidências demonstram a execução dos testes funcionais de interface e as validações da API Pix simulada.
+
+### Testes de interface — Playwright
+
+- [Login realizado com sucesso](evidencias/login/login_sucesso.png)
+- [Transferência Pix realizada](evidencias/pix/pix_realizado.png)
+- [Validação do extrato Pix](evidencias/pix/pix_extrato.png)
+
+### Testes de API — Swagger
+
+- [Evidências da API em PDF](evidencias/api/Swagger.pdf)
+- [Evidências da API em Word](evidencias/api/Swagger.docx)
+
+
 ## Autor
 
 Projeto desenvolvido para fins de aprendizado, prática e construção de portfólio profissional na área de Quality Assurance e Automação de Testes.
