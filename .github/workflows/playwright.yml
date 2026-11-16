@@ -38,7 +38,7 @@ jobs:
 
     - name: Upload HTML report
       if: ${{ !cancelled() }}
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: relatorio-html
         path: reports/relatorio.html
@@ -46,8 +46,8 @@ jobs:
 
     - name: Upload Playwright traces
       if: ${{ !cancelled() }}
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: playwright-traces
         path: test-results/
-        if-no-files-found: warn
+        if-no-files-found: ignore
