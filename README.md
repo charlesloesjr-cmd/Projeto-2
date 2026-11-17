@@ -22,11 +22,21 @@ O objetivo é demonstrar conhecimentos práticos em testes funcionais, testes po
 ## Estrutura do projeto
 
 ```text
+
 Projeto-2/
 │
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml
+│
+├── evidencias/
+│   ├── api/
+│   │   └── Swagger.pdf
+│   ├── login/
+│   │   └── login_sucesso.png
+│   └── pix/
+│       ├── pix_extrato.png
+│       └── pix_realizado.png
 │
 ├── pages/
 │   ├── common_page.py
@@ -47,6 +57,7 @@ Projeto-2/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+
 ```
 
 ## API Pix simulada
